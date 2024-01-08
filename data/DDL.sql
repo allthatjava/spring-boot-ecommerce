@@ -1,3 +1,5 @@
+CREATE SCHEMA full_stack_ecommerce AUTHORIZATION postgres;
+
 CREATE TABLE full_stack_ecommerce.address (
   id serial NOT NULL,
   city varchar(255) NULL,

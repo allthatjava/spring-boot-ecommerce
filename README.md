@@ -20,7 +20,7 @@ ENTRYPOINT ["java", "-jar", "spring-boot-ecommerce.jar"]
 $ docker run -d \
   --name db-container \
   --network my-network \
-  -e MYSQL_PASSWORD=mysecretpassword \
+  -e POSTGRES_PASSWORD=mysecretpassword \
   -p 5432:5432 \
   postgres
 ```
@@ -30,4 +30,44 @@ $ docker run -d \
 $ docker run --network my-network \
  -p 8080:8080 \
  spring-boot-ecommerce
+```
+
+### Docker Compose
+To run multiple container in one config file, try `docker-compose`
+```
+version: "1"
+services:
+  db-container:
+    image: postgres:latest
+    container_name: db-container
+    environment:
+      POSTGRES_PASSWORD: mysecretpassword
+    networks:
+      - my-network
+    ports:
+      - 5432:5432
+  spring-boot-ecommerce:
+    image: spring-boot-ecommerce:latest
+    container_name: spring-boot-ecommerce
+    ports:
+      - 8080:8080
+    networks:
+      - my-network
+  angular-ecommerce:
+    image: angular-ecommerce:latest
+    container_name: angular-ecommerce
+    ports:
+      - 80:80
+    networks:
+      - my-network
+networks:
+  my-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: "172.18.0.0/16"
+```
+Set up as above then run the following command in the directory where `docker-compose` file located.
+```
+docker-compose up
 ```
