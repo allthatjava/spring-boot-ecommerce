@@ -1,8 +1,9 @@
 package brian.project.ecommerce.springbootecommerce.entity;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
@@ -18,6 +19,7 @@ public class ProductCategory {
     @Column(name="category_name")
     private String categoryName;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
     private Set<Product> products;
 }

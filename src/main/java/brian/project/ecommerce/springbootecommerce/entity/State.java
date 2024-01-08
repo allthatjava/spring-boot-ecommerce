@@ -1,7 +1,8 @@
 package brian.project.ecommerce.springbootecommerce.entity;
 
-import jakarta.persistence.*;
 import lombok.Data;
+
+import javax.persistence.*;
 
 @Entity
 @Table(schema="full_stack_ecommerce",name="state")

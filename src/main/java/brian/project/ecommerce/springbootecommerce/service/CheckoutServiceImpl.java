@@ -6,9 +6,9 @@ import brian.project.ecommerce.springbootecommerce.dto.PurchaseResponse;
 import brian.project.ecommerce.springbootecommerce.entity.Customer;
 import brian.project.ecommerce.springbootecommerce.entity.Order;
 import brian.project.ecommerce.springbootecommerce.entity.OrderItem;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
 import java.util.UUID;
