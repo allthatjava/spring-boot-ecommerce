@@ -1,0 +1,37 @@
+version: "1"
+services:
+  db-container:
+    image: postgres:latest
+    container_name: db-container
+    environment:
+      POSTGRES_PASSWORD: mysecretpassword
+    networks:
+      - my-network
+    ports:
+      - 5432:5432
+  spring-boot-ecommerce:
+    image: spring-boot-ecommerce:latest
+    container_name: spring-boot-ecommerce
+    ports:
+      - 8080:8080
+    networks:
+      - my-network
+#    links:
+#      - db-container
+  angular-ecommerce:
+    image: angular-ecommerce:latest
+    container_name: angular-ecommerce
+    ports:
+      - 80:80
+    networks:
+      - my-network
+#    links:
+#      - spring-boot-ecommerce
+networks:
+  my-network:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: my_custom_bridge
+    # ipam:
+    #   config:
+    #     - subnet: "172.18.0.0/16"
