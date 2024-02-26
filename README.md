@@ -1,6 +1,9 @@
 ### Link to Frontend (Angular)
 [Angular Frontend Code](https://github.com/allthatjava/angular-ecommerce)
 
+### To run the code
+need to set Active profile as `dev` to run the application locally
+
 ### If you want to dockerize the applicaiton
 * First download postgres dbms image [Postgres Image](https://hub.docker.com/_/postgres)
 ```
@@ -13,6 +16,7 @@ FROM openjdk:11-jre
 COPY target/spring-boot-ecommerce-0.0.1-SNAPSHOT.jar spring-boot-ecommerce.jar
 ENTRYPOINT ["java", "-jar", "spring-boot-ecommerce.jar"]
  ```
+To build a docker image `docker build -t spring-boot-ecommerce .`
 
 * To run the database and application in the same docker, it need to setup a network, so it can talk to each other
 * Run the __database__ in the docker network called "my-network" with container name "db-container"
