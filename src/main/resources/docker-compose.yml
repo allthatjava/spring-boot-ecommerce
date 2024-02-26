@@ -30,6 +30,8 @@ services:
 networks:
   my-network:
     driver: bridge
-    ipam:
-      config:
-        - subnet: "172.18.0.0/16"
+    driver_opts:
+      com.docker.network.bridge.name: my_custom_bridge
+    # ipam:
+    #   config:
+    #     - subnet: "172.18.0.0/16"

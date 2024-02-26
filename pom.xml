@@ -46,30 +46,32 @@
 
     <profiles>
         <profile>
+            <id>dev</id>
+            <properties>
+                <profile.active>dev</profile.active>
+            </properties>
+        </profile>
+        <profile>
             <id>docker</id>
             <properties>
                 <profile.active>docker</profile.active>
             </properties>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-resources-plugin</artifactId>
-                        <version>3.2.0</version>
-                        <configuration>
-                            <delimiters>
-                                <delimiter>@</delimiter> <!-- Define your delimiter here; @ is common -->
-                            </delimiters>
-                            <useDefaultDelimiters>false</useDefaultDelimiters>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
         </profile>
     </profiles>
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <delimiters>
+                        <delimiter>@</delimiter> <!-- Define your delimiter here; @ is common -->
+                    </delimiters>
+                    <useDefaultDelimiters>false</useDefaultDelimiters>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -90,7 +92,31 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>process-resources</phase>
+                        <configuration>
+                            <target>
+<!--                                <move file="${project.build.outputDirectory}/application-${profile.active}.properties"-->
+<!--                                      tofile="${project.build.outputDirectory}/application.properties"-->
+<!--                                      overwrite="true"/>-->
+                                <delete>
+                                    <fileset dir="${project.build.outputDirectory}" includes="application-*.properties"
+                                    excludes="application-${profile.active}.properties"/>
+                                </delete>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
-
 </project>

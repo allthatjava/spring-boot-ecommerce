@@ -37,6 +37,7 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
         // call an internal helper method
         exposeIds(config);
 
+        System.out.println("#################################ALLOWED ORIGIN:"+allowedOrigin);
         cors.addMapping(config.getBasePath()+"/**").allowedOrigins(allowedOrigin);
     }
 
